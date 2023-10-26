@@ -30,8 +30,8 @@ def preprocess(df,max_mutation_count=60):
                'alt_germline_alignment',
                'mutation_count']
 
-    df[['v_gene','_']] = df['v_call'].str.split('*',1,expand=True) 
-    df[['j_gene','_']] = df['j_call'].str.split('*',1,expand=True) 
+    df[['v_gene','_']] = df['v_call'].str.split('*',n=1,expand=True)
+    df[['j_gene','_']] = df['j_call'].str.split('*',n=1,expand=True)
     df['cdr3'] = df['junction'].str[3:-3]
     df['cdr3_length'] = df['cdr3'].str.len()
     df = df.loc[df['cdr3_length']>0]
@@ -125,7 +125,7 @@ class EM():
 class Apriori():
     """ Computes statistics of pairwise distances """
     
-    def __init__(self, df, lengths=None, default_length=None, nmin=1e5, nmax=1e5, threads=None):
+    def __init__(self, df, lengths=None, default_length=None, nmin=1e1, nmax=1e5, threads=None):
         if lengths is None: self.lengths = np.arange(15,81+3,3).astype(int)
         else: self.lengths = lengths
         if default_length is None: self.default_length = 45

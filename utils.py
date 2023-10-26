@@ -53,7 +53,7 @@ class Compatible():
         df = pd.DataFrame(list(zip(descriptions, seqs)), columns =['label', 'germline_alignment']) 
         head = ['_']*16
         head[1] = 'call'
-        df[head] = df['label'].str.split('|',16,expand=True)
+        df[head] = df['label'].str.split('|',n=16,expand=True)
         return df[['call','germline_alignment']]
         
     def group2airr(self,args):
